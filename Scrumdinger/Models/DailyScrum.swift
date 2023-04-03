@@ -24,13 +24,9 @@ struct DailyScrum: Identifiable {
     }
     
 }
+
+
 extension DailyScrum {
-    mutating func update(from data: Data) {
-        title = data.title
-        attendees = data.attendees
-        lengthInMinutes = Int(data.lengthInMinutes)
-        theme = data.theme
-    }
     struct Attendee: Identifiable {
         let id: UUID
         var name: String
@@ -39,7 +35,6 @@ extension DailyScrum {
             self.id = id
             self.name = name
         }
-        
     }
     
     struct Data {
@@ -52,7 +47,23 @@ extension DailyScrum {
     var data: Data {
         Data(title: title, attendees: attendees, lengthInMinutes: Double(lengthInMinutes), theme: theme)
     }
+    
+    mutating func update(from data: Data) {
+        title = data.title
+        attendees = data.attendees
+        lengthInMinutes = Int(data.lengthInMinutes)
+        theme = data.theme
+    }
+    
+    init(data: Data) {
+        id = UUID()
+        title = data.title
+        attendees = data.attendees
+        lengthInMinutes = Int(data.lengthInMinutes)
+        theme = data.theme
+    }
 }
+
 
 
 
